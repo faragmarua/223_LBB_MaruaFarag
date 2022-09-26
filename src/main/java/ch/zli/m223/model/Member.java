@@ -1,12 +1,16 @@
 package ch.zli.m223.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
@@ -34,6 +38,13 @@ public class Member implements Serializable {
 
   @Column(name = "is_admin", nullable = false)
   Boolean isAdmin = false;
+
+  @OneToMany(mappedBy="member")
+    private Set<Booking> bookings;
+
+    @ManyToOne
+    @JoinColumn(name="admin_id", nullable=false)
+    private Admin admin;
 
 
   @Override

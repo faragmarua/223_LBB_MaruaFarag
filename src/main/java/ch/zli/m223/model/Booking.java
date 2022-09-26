@@ -75,6 +75,15 @@ public class Booking implements Serializable {
     this.status = status;
   }
 
+  @OneToMany(mappedBy="booking")
+    private Set<Workspace> workspaces;
+
+    @ManyToOne
+    @JoinColumn(name="member_id", nullable=false)
+    private Member member;
+  
+  
+
   // public Member getMember() {
   //   return member;
   // }
