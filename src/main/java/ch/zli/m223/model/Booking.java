@@ -6,7 +6,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 @Entity(name = "BOOKING")
 public class Booking implements Serializable {
@@ -19,24 +18,20 @@ public class Booking implements Serializable {
   private Date date;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "time")
+  @Column(name = "time", nullable = false)
   private BookingTime time;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "status")
+  @Column(name = "status", nullable = false)
   private BookingStatus status;
 
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "member_id", nullable = false)
+  private Member member;
 
-  // @ManyToOne(optional = false)
-  // private Member member;
-
-  // @ManyToMany
-  // @JoinTable(
-  //   name = "entry_tags",
-  //   joinColumns = @JoinColumn(name = "entry_id"),
-  //   inverseJoinColumns = @JoinColumn(name = "tag_id")
-  // )
-  // private Set<Workspace> workspaces;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "workspace_id", nullable = false)
+  private Workspace workspaces;
 
   @Override
   public int hashCode() {
@@ -75,28 +70,20 @@ public class Booking implements Serializable {
     this.status = status;
   }
 
-  @OneToMany(mappedBy="booking")
-    private Set<Workspace> workspaces;
+  public Member getMember() {
+    return member;
+  }
 
-    @ManyToOne
-    @JoinColumn(name="member_id", nullable=false)
-    private Member member;
-  
-  
+  public void setMember(Member member) {
+    this.member = member;
+  }
 
-  // public Member getMember() {
-  //   return member;
-  // }
+  public Workspace getWorkspaces() {
+    return this.workspaces;
+  }
 
-  // public void setMember(Member member) {
-  //   this.member = member;
-  // }
+  public void setWorkspaces(Workspace workspaces) {
+    this.workspaces = workspaces;
+  }
 
-  // public Set<Workspace> getWorkspaces() {
-  //   return workspaces;
-  // }
-
-  // public void setWorkspaces(Set<Workspace> workspaces) {
-  //   this.workspaces = workspaces;
-  // }
 }
