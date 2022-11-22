@@ -14,15 +14,12 @@ import javax.persistence.OneToMany;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-
 @Entity(name = "MEMBER")
 public class Member implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Schema(readOnly = true)
   private Long id;
-
-
 
   @Column(name = "email", nullable = false)
   private String email;
@@ -39,19 +36,17 @@ public class Member implements Serializable {
   @Column(name = "is_admin", nullable = false)
   Boolean isAdmin = false;
 
-  @OneToMany(mappedBy="member")
-    private Set<Booking> bookings;
+  @OneToMany(mappedBy = "member")
+  private Set<Booking> bookings;
 
-    @ManyToOne
-    @JoinColumn(name="admin_id", nullable=false)
-    private Admin admin;
-
+  @ManyToOne
+  @JoinColumn(name = "admin_id", nullable = false)
+  private Admin admin;
 
   @Override
   public int hashCode() {
     return getClass().hashCode();
   }
-
 
   public String getEmail() {
     return email;

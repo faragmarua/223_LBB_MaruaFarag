@@ -25,16 +25,13 @@ public class Booking implements Serializable {
   @Column(name = "status", nullable = false)
   private BookingStatus status;
 
-  // @ManyToOne(optional = false)
-  // private Member member;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "member_id", nullable = false)
+  private Member member;
 
-  // @ManyToMany
-  // @JoinTable(
-  // name = "entry_tags",
-  // joinColumns = @JoinColumn(name = "entry_id"),
-  // inverseJoinColumns = @JoinColumn(name = "tag_id")
-  // )
-  // private Set<Workspace> workspaces;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "workspace_id", nullable = false)
+  private Workspace workspaces;
 
   @Override
   public int hashCode() {
@@ -73,19 +70,20 @@ public class Booking implements Serializable {
     this.status = status;
   }
 
-  // public Member getMember() {
-  // return member;
-  // }
+  public Member getMember() {
+    return member;
+  }
 
-  // public void setMember(Member member) {
-  // this.member = member;
-  // }
+  public void setMember(Member member) {
+    this.member = member;
+  }
 
-  // public Set<Workspace> getWorkspaces() {
-  // return workspaces;
-  // }
+  public Workspace getWorkspaces() {
+    return this.workspaces;
+  }
 
-  // public void setWorkspaces(Set<Workspace> workspaces) {
-  // this.workspaces = workspaces;
-  // }
+  public void setWorkspaces(Workspace workspaces) {
+    this.workspaces = workspaces;
+  }
+
 }

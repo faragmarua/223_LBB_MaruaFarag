@@ -7,7 +7,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import ch.zli.m223.model.Booking;
+import ch.zli.m223.model.Admin;
+import ch.zli.m223.model.Admin;
 
 @ApplicationScoped
 public class AdminService {
@@ -27,12 +28,12 @@ public class AdminService {
     }
 
     @Transactional
-    public Booking updateAdmin(Long id, Admin admin) {
+    public Admin updateAdmin(Long id, Admin admin) {
         return entityManager.merge(admin);
     }
 
-    public List<Booking> findAll() {
-        var query = entityManager.createQuery("FROM Adminn", Admin.class);
+    public List<Admin> findAll() {
+        var query = entityManager.createQuery("FROM Admin", Admin.class);
         return query.getResultList();
     }
 }
