@@ -14,18 +14,29 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Entity
 public class Admin {
 
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Schema(readOnly = true)
   private Long id;
 
+  public Admin(Long id, String name, Set<Member> members) {
+    this.id = id;
+    this.name = name;
+    this.members = members;
+  }
+
   @Column(nullable = false)
   private String name;
 
-  @OneToMany(mappedBy="admin")
-    private Set<Member> members;
+  @OneToMany(mappedBy = "admin")
+  private Set<Member> members;
 
-  
-    
+  public String getName() {
+    return this.name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
 }
