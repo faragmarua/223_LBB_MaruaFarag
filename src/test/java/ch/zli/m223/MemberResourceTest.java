@@ -14,14 +14,14 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse.BodyHandlers;
 
 @QuarkusTest
-public class BookingResourceTest {
+public class MemberResourceTest {
     // Good Case
     @Test
     public void testGetAll() throws IOException, InterruptedException {
         String token = getAdminToken();
         given()
                 .header("Authorization", "Bearer " + token)
-                .when().get("/api/bookings/getAll")
+                .when().get("/api/users/getAll")
                 .then()
                 .statusCode(200);
     }
@@ -32,7 +32,7 @@ public class BookingResourceTest {
         String token = getUserToken();
         RestAssured.given()
                 .header("Authorization", "Bearer " + token)
-                .when().delete("/api/bookings/delete/1")
+                .when().delete("/api/users/delete/1")
                 .then()
                 .assertThat()
                 .statusCode(403);
