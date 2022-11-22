@@ -16,55 +16,43 @@ import javax.ws.rs.core.MediaType;
 import ch.zli.m223.model.Workspace;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
-import ch.zli.m223.service.TagService;
+import ch.zli.m223.service.WorkspaceService;
 
-@Path("/tags")
+@Path("/workspaces")
 // Überlegen Sie sich, weshalb das notwendig ist.
-@org.eclipse.microprofile.openapi.annotations.tags.Tag(name = "Tags", description = "Handling of tags")
-public class TagController {
+@org.eclipse.microprofile.openapi.annotations.tags.Tag(name = "Workspace", description = "Handling of workspaces")
+public class WorkspaceController {
 
     @Inject
-    TagService tagService;
+    WorkspaceService workspaceService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-        summary = "Index all tags.", 
-        description = "Returns a list of all tags."
-    )
+    @Operation(summary = "Index all workspaces.", description = "Returns a list of all workspaces.")
     public List<Workspace> index() {
-        return tagService.findAll();
+        return workspaceService.findAll();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(
-        summary = "Creates a new tag.", 
-        description = "Creates a new tag and returns the newly added tag."
-    )
+    @Operation(summary = "Creates a new workspace.", description = "Creates a new tag and returns the newly added workspace.")
     public Workspace create(Workspace workspace) {
-       return tagService.createTag(workspace);
+        return workspaceService.createWorkspace(workspace);
     }
 
     @Path("/{id}")
     @DELETE
-    @Operation(
-        summary = "Deletes an tag.",
-        description = "Deletes an tag by its id."
-    )
+    @Operation(summary = "Deletes an workspace.", description = "Deletes an workspace by its id.")
     public void delete(@PathParam("id") Long id) {
-        tagService.deleteTag(id);
+        workspaceService.deleteWorkspace(id);
     }
 
     @Path("/{id}")
     @PUT
-    @Operation(
-        summary = "Updates an tag.",
-        description = "Updates an tag by its id."
-    )
+    @Operation(summary = "Updates an workspace.", description = "Updates an workspace by its id.")
     public Workspace update(@PathParam("id") Long id, Workspace workspace) {
-        return tagService.updateTag(id, workspace);
+        return workspaceService.updateWorkspace(id, workspace);
     }
 
 }

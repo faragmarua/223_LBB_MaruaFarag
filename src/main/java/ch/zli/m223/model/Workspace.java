@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
@@ -31,17 +29,12 @@ public class Workspace {
   // private Set<Booking> entries;
 
   // public Long getId() {
-  //   return id;
+  // return id;
   // }
-
-  @ManyToOne
-    @JoinColumn(name="booking_id", nullable=false)
-    private Booking booking;
 
   public void setId(Long id) {
     this.id = id;
   }
-
 
   public String getDescription() {
     return description;
@@ -67,5 +60,11 @@ public class Workspace {
     this.whiteboard = whiteboard;
   }
 
-  
+  // public Set<Booking> getEntries() {
+  // return entries;
+  // }
+
+  // public void setEntries(Set<Booking> entries) {
+  // this.entries = entries;
+  // }
 }

@@ -6,7 +6,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 @Entity(name = "BOOKING")
 public class Booking implements Serializable {
@@ -19,22 +18,21 @@ public class Booking implements Serializable {
   private Date date;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "time")
+  @Column(name = "time", nullable = false)
   private BookingTime time;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "status")
+  @Column(name = "status", nullable = false)
   private BookingStatus status;
-
 
   // @ManyToOne(optional = false)
   // private Member member;
 
   // @ManyToMany
   // @JoinTable(
-  //   name = "entry_tags",
-  //   joinColumns = @JoinColumn(name = "entry_id"),
-  //   inverseJoinColumns = @JoinColumn(name = "tag_id")
+  // name = "entry_tags",
+  // joinColumns = @JoinColumn(name = "entry_id"),
+  // inverseJoinColumns = @JoinColumn(name = "tag_id")
   // )
   // private Set<Workspace> workspaces;
 
@@ -75,28 +73,19 @@ public class Booking implements Serializable {
     this.status = status;
   }
 
-  @OneToMany(mappedBy="booking")
-    private Set<Workspace> workspaces;
-
-    @ManyToOne
-    @JoinColumn(name="member_id", nullable=false)
-    private Member member;
-  
-  
-
   // public Member getMember() {
-  //   return member;
+  // return member;
   // }
 
   // public void setMember(Member member) {
-  //   this.member = member;
+  // this.member = member;
   // }
 
   // public Set<Workspace> getWorkspaces() {
-  //   return workspaces;
+  // return workspaces;
   // }
 
   // public void setWorkspaces(Set<Workspace> workspaces) {
-  //   this.workspaces = workspaces;
+  // this.workspaces = workspaces;
   // }
 }
