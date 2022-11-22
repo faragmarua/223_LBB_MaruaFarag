@@ -23,5 +23,3 @@ insert into member (id, email, firstname, lastname, password, is_admin) values (
 
 insert into workspace (id, description, beamer, whiteboard) values (4, 'xyz', false , true);
 insert into workspace (id, description, beamer, whiteboard, ) values (5, 'bi', 'Barris', true, true);
-
-
