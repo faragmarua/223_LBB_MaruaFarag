@@ -20,3 +20,6 @@ insert into member (id, email, firstname, lastname, password, is_dmin) values (2
 insert into member (id, email, firstname, lastname, password, is_Admin) values (3, 'lpostgate2@telegraph.co.uk', 'Laureen', 'Postgate', 'UVnQ5fLhtxr5', false);
 insert into member (id, email, firstname, lastname, password, is_dmin) values (4, 'jhanley3@blogspot.com', 'Jacki', 'Hanley', 'pxZK7NvbMxa', true);
 insert into member (id, email, firstname, lastname, password, is_admin) values (5, 'bisakovitch4@si.edu', 'Barris', 'Isakovitch', 'L4JmEDIG', true);
+
+insert into workspace (id, description, beamer, whiteboard) values (4, 'xyz', false , true);
+insert into workspace (id, description, beamer, whiteboard, ) values (5, 'bi', 'Barris', true, true);
