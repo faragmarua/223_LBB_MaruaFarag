@@ -19,11 +19,11 @@ public class Booking implements Serializable {
   private Date date;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "time", nullable = false)
+  @Column(name = "time")
   private BookingTime time;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "status", nullable = false)
+  @Column(name = "status")
   private BookingStatus status;
 
 
@@ -74,6 +74,15 @@ public class Booking implements Serializable {
   public void setStatus(BookingStatus status) {
     this.status = status;
   }
+
+  @OneToMany(mappedBy="booking")
+    private Set<Workspace> workspaces;
+
+    @ManyToOne
+    @JoinColumn(name="member_id", nullable=false)
+    private Member member;
+  
+  
 
   // public Member getMember() {
   //   return member;
