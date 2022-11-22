@@ -19,11 +19,11 @@ public class Booking implements Serializable {
   private Date date;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "time", nullable = false)
+  @Column(name = "time")
   private BookingTime time;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "status", nullable = false)
+  @Column(name = "status")
   private BookingStatus status;
 
 
