@@ -35,4 +35,11 @@ public class MemberService {
         var query = entityManager.createQuery("FROM Member", Member.class);
         return query.getResultList();
     }
+
+    public Member getUserByEmailAndPassword(String emailToBeChecked, String passwordToBeChecked) {
+        var query = entityManager.createQuery(
+                "FROM User WHERE email = '" + emailToBeChecked + "' AND passwort = '" + passwordToBeChecked + "'",
+                Member.class);
+        return query.getSingleResult();
+    }
 }
