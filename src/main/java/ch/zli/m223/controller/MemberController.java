@@ -2,6 +2,8 @@ package ch.zli.m223.controller;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -27,42 +29,41 @@ public class MemberController {
     MemberService categoryService;
 
     @GET
+    @Path("/getAll")
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-        summary = "Index all members.", 
-        description = "Returns a list of all categories."
-    )
+    @RequestScoped
+    @Operation(summary = "Index all members.", description = "Returns a list of all categories.")
     public List<Member> index() {
         return categoryService.findAll();
     }
 
     @POST
+    @Path("/create")
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(
-        summary = "Creates a new Member.", 
-        description = "Creates a new category and returns the newly added category."
-    )
+    @Operation(summary = "Creates a new Member.", description = "Creates a new category and returns the newly added category.")
     public Member create(Member member) {
-       return categoryService.createMember(member);
+        return categoryService.createMember(member);
     }
 
-    @Path("/{id}")
     @DELETE
-    @Operation(
-        summary = "Deletes a member.",
-        description = "Deletes a category by its id."
-    )
+    @RolesAllowed("admin")
+    @Path("/delete/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequestScoped
+    @Operation(summary = "Deletes a member.", description = "Deletes a category by its id.")
     public void delete(@PathParam("id") Long id) {
         categoryService.deleteMember(id);
     }
 
-    @Path("/{id}")
     @PUT
-    @Operation(
-        summary = "Updates a member.",
-        description = "Updates a member by its id."
-    )
+    @Path("/put/{id}")
+    @RolesAllowed("admin")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Updates a member.", description = "Updates a member by its id.")
     public Member update(@PathParam("id") Long id, Member member) {
         return categoryService.updatMember(id, member);
     }

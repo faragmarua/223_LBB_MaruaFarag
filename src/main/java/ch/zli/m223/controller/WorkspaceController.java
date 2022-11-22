@@ -2,6 +2,8 @@ package ch.zli.m223.controller;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -27,13 +29,18 @@ public class WorkspaceController {
     WorkspaceService workspaceService;
 
     @GET
+    @Path("/getAll")
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
+    @RequestScoped
     @Operation(summary = "Index all workspaces.", description = "Returns a list of all workspaces.")
     public List<Workspace> index() {
         return workspaceService.findAll();
     }
 
     @POST
+    @RolesAllowed("admin")
+    @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Creates a new workspace.", description = "Creates a new tag and returns the newly added workspace.")
@@ -41,15 +48,21 @@ public class WorkspaceController {
         return workspaceService.createWorkspace(workspace);
     }
 
-    @Path("/{id}")
     @DELETE
+    @RolesAllowed("admin")
+    @Path("/delete/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RequestScoped
     @Operation(summary = "Deletes an workspace.", description = "Deletes an workspace by its id.")
     public void delete(@PathParam("id") Long id) {
         workspaceService.deleteWorkspace(id);
     }
 
-    @Path("/{id}")
     @PUT
+    @Path("/put/{id}")
+    @RolesAllowed("admin")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Updates an workspace.", description = "Updates an workspace by its id.")
     public Workspace update(@PathParam("id") Long id, Workspace workspace) {
         return workspaceService.updateWorkspace(id, workspace);
