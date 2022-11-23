@@ -14,14 +14,14 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse.BodyHandlers;
 
 @QuarkusTest
-public class BookingResourceTest {
+public class WorkspaceResourceTest {
     // Good Case
     @Test
     public void testGetAll() throws IOException, InterruptedException {
-        String token = getAdminToken();
+        String token = getToken();
         given()
                 .header("Authorization", "Bearer " + token)
-                .when().get("/api/bookings/getAll")
+                .when().get("/api/workspaces/getAll")
                 .then()
                 .statusCode(200);
     }
@@ -29,10 +29,10 @@ public class BookingResourceTest {
     // Bad Case
     @Test
     public void testDeleteEndpoint() throws IOException, InterruptedException {
-        String token = getUserToken();
+        String token = getToken();
         RestAssured.given()
                 .header("Authorization", "Bearer " + token)
-                .when().delete("/api/bookings/delete/1")
+                .when().delete("/api/workspaces/delete/-5")
                 .then()
                 .assertThat()
                 .statusCode(403);
@@ -40,23 +40,10 @@ public class BookingResourceTest {
     }
 
     // This method will get the JWT token for the Testcases
-    private String getAdminToken() throws IOException, InterruptedException {
+    private String getToken() throws IOException, InterruptedException {
         var client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/auth/login/mdaughtrey1@jigsy/CZZUwUxDS2c"))
-                .GET()
-                .build();
-
-        // use the client to send the request
-        var response = client.send(request, BodyHandlers.ofString());
-        String token = response.body().toString();
-        return token;
-    }
-
-    private String getUserToken() throws IOException, InterruptedException {
-        var client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/auth/login/lpostgate2@telegraph.co.uk/UVnQ5fLhtxr5"))
                 .GET()
                 .build();
 
