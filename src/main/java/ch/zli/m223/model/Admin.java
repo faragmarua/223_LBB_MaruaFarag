@@ -19,12 +19,6 @@ public class Admin {
   @Schema(readOnly = true)
   private Long id;
 
-  public Admin(Long id, String name, Set<Member> members) {
-    this.id = id;
-    this.name = name;
-    this.members = members;
-  }
-
   @Column(nullable = false)
   private String name;
 

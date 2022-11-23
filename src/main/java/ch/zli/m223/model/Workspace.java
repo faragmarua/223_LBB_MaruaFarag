@@ -28,7 +28,7 @@ public class Workspace {
   @Column(name = "has_whiteboard", nullable = false)
   Boolean whiteboard = false;
 
-  @OneToMany(mappedBy = "workspace")
+  @OneToMany(mappedBy = "workspaces")
   private Set<Booking> bookings;
 
   public Long getId() {
