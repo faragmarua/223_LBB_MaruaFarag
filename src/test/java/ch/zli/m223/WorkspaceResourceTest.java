@@ -1,3 +1,5 @@
+package ch.zli.m223;
+
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;

@@ -41,14 +41,14 @@ public class AdminController {
         return adminService.createAdmin(admin);
     }
 
-    @Path("/{id}")
+    @Path("/delete/{id}")
     @DELETE
     @Operation(summary = "Deletes an admin.", description = "Deletes an admin by its id.")
     public void delete(@PathParam("id") Long id) {
         adminService.deleteAdmin(id);
     }
 
-    @Path("/{id}")
+    @Path("/put/{id}")
     @PUT
     @Operation(summary = "Updates an admin.", description = "Updates an admin by its id.")
     public Admin update(@PathParam("id") Long id, Admin admin) {
