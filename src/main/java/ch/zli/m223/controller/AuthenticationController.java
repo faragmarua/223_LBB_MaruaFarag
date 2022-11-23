@@ -19,9 +19,6 @@ import org.jboss.resteasy.reactive.RestResponse.StatusCode;
 
 import ch.zli.m223.model.Member;
 import ch.zli.m223.service.MemberService;
-import io.jsonwebtoken.Jwt;
-
-import org.eclipse.microprofile.jwt;
 
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
