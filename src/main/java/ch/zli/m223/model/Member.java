@@ -36,6 +36,14 @@ public class Member implements Serializable {
   @Column(name = "is_admin", nullable = false)
   Boolean isAdmin = false;
 
+  public Boolean getIsAdmin() {
+    return this.isAdmin;
+  }
+
+  public void setIsAdmin(Boolean isAdmin) {
+    this.isAdmin = isAdmin;
+  }
+
   @OneToMany(mappedBy = "member")
   private Set<Booking> bookings;
 

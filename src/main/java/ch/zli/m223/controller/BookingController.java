@@ -2,6 +2,8 @@ package ch.zli.m223.controller;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -27,9 +29,19 @@ public class BookingController {
     BookingService bookingService;
 
     @GET
+    @Path("/getAll")
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Index all bookings.", description = "Returns a list of all bookings.")
     public List<Booking> index() {
+        return bookingService.findAll();
+    }
+
+    @GET
+    @Path("/get/{id}")
+    @PermitAll
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<Booking> getBookingsByUserId(@PathParam("id") Long id) {
         return bookingService.findAll();
     }
 
@@ -41,15 +53,19 @@ public class BookingController {
         return bookingService.createBooking(booking);
     }
 
-    @Path("/{id}")
     @DELETE
+    @RolesAllowed("admin")
+    @Path("/delete/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Deletes an booking.", description = "Deletes an booking by its id.")
     public void delete(@PathParam("id") Long id) {
         bookingService.deleteBooking(id);
     }
 
-    @Path("/{id}")
     @PUT
+    @Path("/put")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Updates an booking.", description = "Updates an booking by its id.")
     public Booking update(@PathParam("id") Long id, Booking booking) {
         return bookingService.updateBooking(id, booking);
